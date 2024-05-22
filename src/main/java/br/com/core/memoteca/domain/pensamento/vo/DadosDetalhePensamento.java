@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 public record DadosDetalhePensamento(
         Long id,
-        String nome,
-        String login,
+        String descricao,
+        String autoria,
         Long idUsuario) implements Serializable {
 
     public DadosDetalhePensamento(Pensamento pensamento) {

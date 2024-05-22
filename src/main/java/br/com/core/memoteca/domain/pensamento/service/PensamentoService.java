@@ -5,6 +5,8 @@ import br.com.core.memoteca.domain.pensamento.entity.Pensamento;
 import br.com.core.memoteca.domain.pensamento.repository.PensamentoRepository;
 import br.com.core.memoteca.domain.pensamento.vo.DadosDetalhePensamento;
 import br.com.core.memoteca.domain.pensamento.vo.DadosPensamento;
+import br.com.core.memoteca.domain.usuario.entity.Usuario;
+import br.com.core.memoteca.domain.usuario.vo.DadosDetalheUsuario;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -25,7 +27,7 @@ public class PensamentoService {
     }
 
     @CacheEvict(value = "listaPensamentos", allEntries = true)
-    public DadosDetalhePensamento cadastrarPensamento(DadosPensamento dados) {
+    public DadosDetalhePensamento cadastrarPensamento(DadosPensamento dados, DadosDetalheUsuario usuario) {
         if (dados.descricao() == null || dados.descricao().isEmpty()) {
             throw new RegraDeNegocioException("O pensamento deve estar preenchido!");
         }
@@ -34,7 +36,9 @@ public class PensamentoService {
             throw new RegraDeNegocioException("A autoria deve estar preenchido!");
         }
 
-        var pensamento = new Pensamento(dados);
+        Usuario usuarioDados = new Usuario(usuario);
+
+        var pensamento = new Pensamento(dados, usuarioDados);
 
         repository.save(pensamento);
 

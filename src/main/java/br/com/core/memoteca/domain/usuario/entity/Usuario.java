@@ -1,5 +1,6 @@
 package br.com.core.memoteca.domain.usuario.entity;
 
+import br.com.core.memoteca.domain.usuario.vo.DadosDetalheUsuario;
 import br.com.core.memoteca.domain.usuario.vo.DadosUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,10 +26,14 @@ public class Usuario {
 
     private String senha;
 
-    public Usuario(DadosUsuario dados) {
+    public Usuario(DadosDetalheUsuario dados) {
+        this.id = dados.id();
         this.nome = dados.nome();
         this.login = dados.login();
         this.senha = dados.senha();
+    }
+
+    public Usuario(DadosUsuario dados) {
     }
 
     public void atualizarDados(DadosUsuario dados) {

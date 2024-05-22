@@ -27,11 +27,6 @@ public class Pensamento {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    public Pensamento(DadosPensamento dados) {
-        this.descricao = dados.descricao();
-        this.autoria = dados.autoria();
-    }
-
     public void atualizarDados(DadosPensamento dados) {
         this.descricao = dados.descricao();
         this.autoria = dados.autoria();

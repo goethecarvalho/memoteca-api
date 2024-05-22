@@ -5,7 +5,6 @@ import br.com.core.memoteca.domain.pensamento.vo.DadosDetalhePensamento;
 import br.com.core.memoteca.domain.pensamento.vo.DadosPensamento;
 import br.com.core.memoteca.domain.usuario.service.UsuarioService;
 import br.com.core.memoteca.domain.usuario.vo.DadosDetalheUsuario;
-import br.com.core.memoteca.domain.usuario.vo.DadosUsuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,44 +21,48 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class PensamentoController {
 
     @Autowired
-    private final PensamentoService service;
+    private final PensamentoService pensamentoService;
 
-    public PensamentoController(PensamentoService service) {
-        this.service = service;
+    @Autowired
+    private final UsuarioService usuarioService;
+
+    public PensamentoController(PensamentoService pensamentoService, UsuarioService usuarioService) {
+        this.pensamentoService = pensamentoService;
+        this.usuarioService = usuarioService;
     }
 
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody @Valid DadosPensamento dados, UriComponentsBuilder uriBuilder){
-
-        var dadosPensamentoCadastrado = service.cadastrarPensamento(dados);
+        DadosDetalheUsuario usuario = usuarioService.detalhar(dados.idUsuario());
+        var dadosPensamentoCadastrado = pensamentoService.cadastrarPensamento(dados, usuario);
         var uri = uriBuilder.path("pensamentos/{id}").buildAndExpand(dadosPensamentoCadastrado.id()).toUri();
         return ResponseEntity.created(uri).body(dadosPensamentoCadastrado);
     }
 
     @GetMapping
     public ResponseEntity<Page<DadosDetalhePensamento>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
-        var pensamento = service.listar(paginacao);
+        var pensamento = pensamentoService.listar(paginacao);
         return ResponseEntity.ok(pensamento);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhePensamento> detalhar(@PathVariable Long id) {
-        var pensamento = service.detalhar(id);
+        var pensamento = pensamentoService.detalhar(id);
         return ResponseEntity.ok(pensamento);
     }
 
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DadosDetalhePensamento> atualizar(@PathVariable Long id, @RequestBody @Valid DadosPensamento dados) {
-        var pensamentoAtualizado = service.atualizarPensamento(id, dados);
+        var pensamentoAtualizado = pensamentoService.atualizarPensamento(id, dados);
         return ResponseEntity.ok(pensamentoAtualizado);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        service.deletarPensamento(id);
+        pensamentoService.deletarPensamento(id);
         return ResponseEntity.noContent().build();
     }
 
