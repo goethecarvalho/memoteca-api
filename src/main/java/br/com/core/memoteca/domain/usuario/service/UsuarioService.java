@@ -1,10 +1,10 @@
-package br.com.core.memoteca.domain.service;
+package br.com.core.memoteca.domain.usuario.service;
 
 import br.com.core.memoteca.domain.RegraDeNegocioException;
-import br.com.core.memoteca.domain.entity.Usuario;
-import br.com.core.memoteca.domain.repository.UsuarioRepository;
-import br.com.core.memoteca.domain.vo.DadosDetalheUsuario;
-import br.com.core.memoteca.domain.vo.DadosUsuario;
+import br.com.core.memoteca.domain.usuario.entity.Usuario;
+import br.com.core.memoteca.domain.usuario.repository.UsuarioRepository;
+import br.com.core.memoteca.domain.usuario.vo.DadosDetalheUsuario;
+import br.com.core.memoteca.domain.usuario.vo.DadosUsuario;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -24,7 +24,6 @@ public class UsuarioService {
     public Page<DadosDetalheUsuario> listar(Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosDetalheUsuario::new);
     }
-
 
     @CacheEvict(value = "listaUsuarios", allEntries = true)
     public DadosDetalheUsuario cadastrarUsuario(DadosUsuario dados) {

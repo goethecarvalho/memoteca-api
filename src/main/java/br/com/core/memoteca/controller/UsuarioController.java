@@ -1,8 +1,8 @@
 package br.com.core.memoteca.controller;
 
-import br.com.core.memoteca.domain.service.UsuarioService;
-import br.com.core.memoteca.domain.vo.DadosDetalheUsuario;
-import br.com.core.memoteca.domain.vo.DadosUsuario;
+import br.com.core.memoteca.domain.usuario.service.UsuarioService;
+import br.com.core.memoteca.domain.usuario.vo.DadosDetalheUsuario;
+import br.com.core.memoteca.domain.usuario.vo.DadosUsuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

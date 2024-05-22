@@ -1,9 +1,8 @@
-package br.com.core.memoteca.domain.vo;
+package br.com.core.memoteca.domain.usuario.vo;
 
-import br.com.core.memoteca.domain.entity.Usuario;
+import br.com.core.memoteca.domain.usuario.entity.Usuario;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 public record DadosDetalheUsuario (
         Long id,

@@ -1,13 +1,11 @@
-package br.com.core.memoteca.domain.entity;
+package br.com.core.memoteca.domain.usuario.entity;
 
-import br.com.core.memoteca.domain.vo.DadosUsuario;
+import br.com.core.memoteca.domain.usuario.vo.DadosUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuarios")

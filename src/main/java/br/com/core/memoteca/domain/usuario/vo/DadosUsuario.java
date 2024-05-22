@@ -1,4 +1,4 @@
-package br.com.core.memoteca.domain.vo;
+package br.com.core.memoteca.domain.usuario.vo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
