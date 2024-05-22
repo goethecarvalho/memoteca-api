@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 
 @RestController
-@RequestMapping("pensamentos")
+@RequestMapping("pensamento")
 public class PensamentoController {
 
     @Autowired
