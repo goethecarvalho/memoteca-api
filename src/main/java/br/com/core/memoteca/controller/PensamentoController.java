@@ -41,7 +41,7 @@ public class PensamentoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosDetalhePensamento>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosDetalhePensamento>> listar(@PageableDefault(size = 10, sort = {"autoria"}) Pageable paginacao) {
         var pensamento = pensamentoService.listar(paginacao);
         return ResponseEntity.ok(pensamento);
     }

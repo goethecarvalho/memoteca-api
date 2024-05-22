@@ -28,7 +28,7 @@ public class PensamentoService {
 
     @CacheEvict(value = "listaPensamentos", allEntries = true)
     public DadosDetalhePensamento cadastrarPensamento(DadosPensamento dados, DadosDetalheUsuario usuario) {
-        if (dados.descricao() == null || dados.descricao().isEmpty()) {
+        if (dados.conteudo() == null || dados.conteudo().isEmpty()) {
             throw new RegraDeNegocioException("O pensamento deve estar preenchido!");
         }
 
@@ -51,7 +51,7 @@ public class PensamentoService {
 
         DadosPensamento pensamentoAtualizado = new DadosPensamento(
                 dados.id(),
-                dados.descricao(),
+                dados.conteudo(),
                 dados.autoria(),
                 dados.idUsuario()
         );

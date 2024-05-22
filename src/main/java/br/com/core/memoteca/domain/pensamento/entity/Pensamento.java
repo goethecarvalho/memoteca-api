@@ -20,7 +20,7 @@ public class Pensamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descricao;
+    private String conteudo;
     private String autoria;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,12 +28,12 @@ public class Pensamento {
     private Usuario usuario;
 
     public void atualizarDados(DadosPensamento dados) {
-        this.descricao = dados.descricao();
+        this.conteudo = dados.conteudo();
         this.autoria = dados.autoria();
     }
 
     public Pensamento(DadosPensamento dados, Usuario usuario) {
-        this.descricao = dados.descricao();
+        this.conteudo = dados.conteudo();
         this.autoria = dados.autoria();
         this.usuario = usuario;
     }

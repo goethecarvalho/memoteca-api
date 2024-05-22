@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 public record DadosDetalhePensamento(
         Long id,
-        String descricao,
+        String conteudo,
         String autoria,
         Long idUsuario) implements Serializable {
 
     public DadosDetalhePensamento(Pensamento pensamento) {
-        this(pensamento.getId(), pensamento.getDescricao(), pensamento.getAutoria(), pensamento.getUsuario().getId());
+        this(pensamento.getId(), pensamento.getConteudo(), pensamento.getAutoria(), pensamento.getUsuario().getId());
     }
 
 }
